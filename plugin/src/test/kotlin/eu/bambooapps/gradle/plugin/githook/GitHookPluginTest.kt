@@ -11,12 +11,21 @@ import kotlin.test.assertNotNull
  * A simple unit test for the 'eu.bambooapps.gradle.plugin.githook' plugin.
  */
 class GitHookPluginTest {
-    @Test fun `plugin registers task`() {
+    @Test fun `plugin registers copy task`() {
         // Create a test project and apply the plugin
         val project = ProjectBuilder.builder().build()
         project.plugins.apply("eu.bambooapps.gradle.plugin.githook")
 
         // Verify the result
         assertNotNull(project.tasks.findByName("copyGitHooks"))
+    }
+
+    @Test fun `plugin registers install task`() {
+        // Create a test project and apply the plugin
+        val project = ProjectBuilder.builder().build()
+        project.plugins.apply("eu.bambooapps.gradle.plugin.githook")
+
+        // Verify the result
+        assertNotNull(project.tasks.findByName("installGitHooks"))
     }
 }
