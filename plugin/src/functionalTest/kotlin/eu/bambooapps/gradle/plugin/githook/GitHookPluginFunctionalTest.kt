@@ -12,7 +12,7 @@ import org.junit.jupiter.api.io.TempDir
 /**
  * A simple functional test for the 'eu.bambooapps.gradle.plugin.githook.greeting' plugin.
  */
-class GitHookPluginPluginFunctionalTest {
+class GitHookPluginFunctionalTest {
 
     @field:TempDir
     lateinit var projectDir: File

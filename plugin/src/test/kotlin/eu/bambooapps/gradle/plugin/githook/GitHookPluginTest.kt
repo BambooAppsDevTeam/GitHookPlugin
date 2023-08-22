@@ -10,7 +10,7 @@ import kotlin.test.assertNotNull
 /**
  * A simple unit test for the 'eu.bambooapps.gradle.plugin.githook.greeting' plugin.
  */
-class GitHookPluginPluginTest {
+class GitHookPluginTest {
     @Test fun `plugin registers task`() {
         // Create a test project and apply the plugin
         val project = ProjectBuilder.builder().build()

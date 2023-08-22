@@ -49,9 +49,9 @@ testing {
 
 gradlePlugin {
     // Define the plugin
-    val greeting by plugins.creating {
-        id = "eu.bambooapps.gradle.plugin.githook.greeting"
-        implementationClass = "eu.bambooapps.gradle.plugin.githook.GitHookPluginPlugin"
+    val githook by plugins.creating {
+        id = "eu.bambooapps.gradle.plugin.githook"
+        implementationClass = "eu.bambooapps.gradle.plugin.githook.GitHookPlugin"
     }
 }
 
