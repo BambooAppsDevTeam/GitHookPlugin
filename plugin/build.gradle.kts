@@ -9,8 +9,8 @@
 plugins {
     // Apply the Java Gradle plugin development plugin to add support for developing Gradle plugins
     `java-gradle-plugin`
+    `kotlin-dsl`
 
-    embeddedKotlin("jvm")
     id("io.gitlab.arturbosch.detekt") version "1.23.1"
 }
 

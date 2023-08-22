@@ -5,17 +5,46 @@ package eu.bambooapps.gradle.plugin.githook
 
 import org.gradle.api.Project
 import org.gradle.api.Plugin
+import org.gradle.api.tasks.Copy
+import org.gradle.api.tasks.Exec
+import org.gradle.kotlin.dsl.register
 
 /**
- * A simple 'hello world' plugin.
+ * Plugin that helps to copy git hooks to the .git folder from the specified directory
  */
 class GitHookPlugin: Plugin<Project> {
     override fun apply(project: Project) {
         // Register a task
-        project.tasks.register("greeting") { task ->
-            task.doLast {
-                println("Hello from plugin 'eu.bambooapps.gradle.plugin.githook.greeting'")
+        project.tasks.register<Copy>("copyGitHooks") {
+            description = "Copies the git hooks from /git-hooks to the .git folder."
+            group = "git hooks"
+            from(project.rootProject.layout.projectDirectory.dir("git-hooks")) {
+                include("**/*.sh")
+                rename("(.*).sh", "$1")
+            }
+            into(project.rootProject.layout.projectDirectory.dir(".git/hooks"))
+            onlyIf { isLinuxOrMacOs() }
+        }
+
+
+        project.tasks.register<Exec>("installGitHooks") {
+            description = "Installs the pre-commit git hooks from /git-hooks."
+            group = "git hooks"
+            workingDir = project.rootProject.layout.projectDirectory.asFile
+            executable = "chmod"
+            setArgs(listOf("-R", "+x", ".git/hooks/"))
+            dependsOn("copyGitHooks")
+            onlyIf { isLinuxOrMacOs() }
+            doLast {
+                logger.info("Git hook installed successfully.")
             }
         }
+    }
+
+    private fun isLinuxOrMacOs(): Boolean {
+        val osName = System.getProperty("os.name").lowercase()
+        return osName.contains("linux") ||
+                osName.contains("mac os") ||
+                osName.contains("macos")
     }
 }
