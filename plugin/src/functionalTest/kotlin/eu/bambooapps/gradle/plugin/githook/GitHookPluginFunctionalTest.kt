@@ -3,14 +3,18 @@
  */
 package eu.bambooapps.gradle.plugin.githook
 
+import org.gradle.testkit.runner.BuildTask
 import java.io.File
 import kotlin.test.assertTrue
 import kotlin.test.Test
 import org.gradle.testkit.runner.GradleRunner
+import org.gradle.testkit.runner.TaskOutcome
 import org.junit.jupiter.api.io.TempDir
+import kotlin.test.assertEquals
+import kotlin.test.assertNotNull
 
 /**
- * A simple functional test for the 'eu.bambooapps.gradle.plugin.githook.greeting' plugin.
+ * A simple functional test for the 'eu.bambooapps.gradle.plugin.githook' plugin.
  */
 class GitHookPluginFunctionalTest {
 
@@ -18,14 +22,21 @@ class GitHookPluginFunctionalTest {
     lateinit var projectDir: File
 
     private val buildFile by lazy { projectDir.resolve("build.gradle") }
+    private val gitHooksDir by lazy { projectDir.resolve("git-hooks") }
+    private val gitHooksDestinationDir by lazy { projectDir.resolve(".git/hooks") }
     private val settingsFile by lazy { projectDir.resolve("settings.gradle") }
 
     @Test fun `can run task`() {
+        gitHooksDir.mkdir()
         // Set up the test build
         settingsFile.writeText("")
         buildFile.writeText("""
             plugins {
-                id('eu.bambooapps.gradle.plugin.githook.greeting')
+                id('eu.bambooapps.gradle.plugin.githook')
+            }
+            
+            gitHooks {
+                gitHooksDirectory = project.layout.projectDirectory.dir("${gitHooksDir.path}")
             }
         """.trimIndent())
 
@@ -33,11 +44,17 @@ class GitHookPluginFunctionalTest {
         val runner = GradleRunner.create()
         runner.forwardOutput()
         runner.withPluginClasspath()
-        runner.withArguments("greeting")
+        runner.withArguments("installGitHooks")
         runner.withProjectDir(projectDir)
         val result = runner.build()
 
         // Verify the result
-        assertTrue(result.output.contains("Hello from plugin 'eu.bambooapps.gradle.plugin.githook.greeting'"))
+        assertEquals(
+            TaskOutcome.SUCCESS,
+            result.task(":installGitHooks" )?.outcome
+        )
+        assertTrue {
+            gitHooksDestinationDir.exists()
+        }
     }
 }
