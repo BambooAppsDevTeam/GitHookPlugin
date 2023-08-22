@@ -10,8 +10,8 @@ plugins {
     // Apply the Java Gradle plugin development plugin to add support for developing Gradle plugins
     `java-gradle-plugin`
 
-    // Apply the Kotlin JVM plugin to add support for Kotlin.
-    id("org.jetbrains.kotlin.jvm") version "1.9.0"
+    embeddedKotlin("jvm")
+    id("io.gitlab.arturbosch.detekt") version "1.23.1"
 }
 
 repositories {
