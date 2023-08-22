@@ -10,6 +10,7 @@ import org.gradle.api.tasks.Exec
 import org.gradle.kotlin.dsl.create
 import org.gradle.kotlin.dsl.provideDelegate
 import org.gradle.kotlin.dsl.register
+import org.gradle.kotlin.dsl.registering
 
 /**
  * Plugin that helps to copy git hooks to the .git folder from the specified directory
@@ -25,15 +26,13 @@ class GitHookPlugin : Plugin<Project> {
             gitHooksDestinationDirectory.set(
                 project.rootProject.layout.projectDirectory.dir(".git/hooks")
             )
+            onlyIf { isLinuxOrMacOs() }
         }
 
 
-        project.tasks.register<Exec>("installGitHooks") {
+        project.tasks.register<InstallGitHooks>("installGitHooks") {
             description = "Installs the pre-commit git hooks from /git-hooks."
             group = "git hooks"
-            workingDir = project.rootProject.layout.projectDirectory.asFile
-            executable = "chmod"
-            setArgs(listOf("-R", "+x", ".git/hooks/"))
             dependsOn("copyGitHooks")
             onlyIf { isLinuxOrMacOs() }
             doLast {

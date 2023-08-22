@@ -27,14 +27,6 @@ abstract class CopyGitHooks : DefaultTask() {
                 rename("(.*).sh", "$1")
             }
             into(gitHooksDestinationDirectory)
-            onlyIf { isLinuxOrMacOs() }
         }
-    }
-
-    private fun isLinuxOrMacOs(): Boolean {
-        val osName = System.getProperty("os.name").lowercase()
-        return osName.contains("linux") ||
-                osName.contains("mac os") ||
-                osName.contains("macos")
     }
 }
