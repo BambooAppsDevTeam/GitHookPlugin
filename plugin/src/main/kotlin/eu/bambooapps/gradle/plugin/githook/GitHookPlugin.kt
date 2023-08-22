@@ -7,6 +7,8 @@ import org.gradle.api.Project
 import org.gradle.api.Plugin
 import org.gradle.api.tasks.Copy
 import org.gradle.api.tasks.Exec
+import org.gradle.kotlin.dsl.create
+import org.gradle.kotlin.dsl.provideDelegate
 import org.gradle.kotlin.dsl.register
 
 /**
@@ -14,11 +16,12 @@ import org.gradle.kotlin.dsl.register
  */
 class GitHookPlugin: Plugin<Project> {
     override fun apply(project: Project) {
+        val extension = project.extensions.create<GitHooksExtension>("gitHooks")
         // Register a task
         project.tasks.register<Copy>("copyGitHooks") {
             description = "Copies the git hooks from /git-hooks to the .git folder."
             group = "git hooks"
-            from(project.rootProject.layout.projectDirectory.dir("git-hooks")) {
+            from(extension.gitHooksDirectory) {
                 include("**/*.sh")
                 rename("(.*).sh", "$1")
             }
@@ -36,7 +39,7 @@ class GitHookPlugin: Plugin<Project> {
             dependsOn("copyGitHooks")
             onlyIf { isLinuxOrMacOs() }
             doLast {
-                logger.info("Git hook installed successfully.")
+                logger.debug("Git hook installed successfully.")
             }
         }
     }
