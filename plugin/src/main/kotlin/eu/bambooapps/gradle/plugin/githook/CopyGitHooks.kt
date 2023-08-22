@@ -20,7 +20,7 @@ abstract class CopyGitHooks : DefaultTask() {
     abstract val fileSystemOperations: FileSystemOperations
 
     @TaskAction
-    fun copyGitHooks() {
+    fun runTask() {
         fileSystemOperations.copy {
             from(gitHooksDirectory) {
                 include("**/*.sh")

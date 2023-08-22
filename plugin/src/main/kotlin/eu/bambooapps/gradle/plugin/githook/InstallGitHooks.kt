@@ -11,7 +11,7 @@ abstract class InstallGitHooks : DefaultTask() {
     abstract val execOperations: ExecOperations
 
     @TaskAction
-    fun installGitHooks() {
+    fun runTask() {
         execOperations.exec {
             executable = "chmod"
             args = listOf("-R", "+x", ".git/hooks/")
