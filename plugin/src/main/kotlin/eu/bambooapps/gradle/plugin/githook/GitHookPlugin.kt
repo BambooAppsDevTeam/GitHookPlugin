@@ -14,19 +14,17 @@ import org.gradle.kotlin.dsl.register
 /**
  * Plugin that helps to copy git hooks to the .git folder from the specified directory
  */
-class GitHookPlugin: Plugin<Project> {
+class GitHookPlugin : Plugin<Project> {
     override fun apply(project: Project) {
         val extension = project.extensions.create<GitHooksExtension>("gitHooks")
         // Register a task
-        project.tasks.register<Copy>("copyGitHooks") {
+        project.tasks.register<CopyGitHooks>("copyGitHooks") {
             description = "Copies the git hooks from /git-hooks to the .git folder."
             group = "git hooks"
-            from(extension.gitHooksDirectory) {
-                include("**/*.sh")
-                rename("(.*).sh", "$1")
-            }
-            into(project.rootProject.layout.projectDirectory.dir(".git/hooks"))
-            onlyIf { isLinuxOrMacOs() }
+            gitHooksDirectory.set(extension.gitHooksDirectory)
+            gitHooksDestinationDirectory.set(
+                project.rootProject.layout.projectDirectory.dir(".git/hooks")
+            )
         }
 
 
