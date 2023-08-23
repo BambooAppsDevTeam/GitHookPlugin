@@ -12,6 +12,7 @@ plugins {
     `kotlin-dsl`
 
     id("io.gitlab.arturbosch.detekt") version "1.23.1"
+    id("com.gradle.plugin-publish") version "1.2.1"
 }
 
 repositories {
