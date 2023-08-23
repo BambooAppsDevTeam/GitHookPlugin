@@ -3,15 +3,13 @@
  */
 package eu.bambooapps.gradle.plugin.githook
 
-import org.gradle.testkit.runner.BuildTask
-import java.io.File
-import kotlin.test.assertTrue
-import kotlin.test.Test
 import org.gradle.testkit.runner.GradleRunner
 import org.gradle.testkit.runner.TaskOutcome
 import org.junit.jupiter.api.io.TempDir
+import java.io.File
+import kotlin.test.Test
 import kotlin.test.assertEquals
-import kotlin.test.assertNotNull
+import kotlin.test.assertTrue
 
 /**
  * A simple functional test for the 'eu.bambooapps.gradle.plugin.githook' plugin.
@@ -26,11 +24,13 @@ class GitHookPluginFunctionalTest {
     private val gitHooksDestinationDir by lazy { projectDir.resolve(".git/hooks") }
     private val settingsFile by lazy { projectDir.resolve("settings.gradle") }
 
-    @Test fun `can run task`() {
+    @Test
+    fun `can run task`() {
         gitHooksDir.mkdir()
         // Set up the test build
         settingsFile.writeText("")
-        buildFile.writeText("""
+        buildFile.writeText(
+            """
             plugins {
                 id('eu.bambooapps.gradle.plugin.githook')
             }
@@ -38,7 +38,8 @@ class GitHookPluginFunctionalTest {
             gitHooks {
                 gitHooksDirectory = project.layout.projectDirectory.dir("${gitHooksDir.path}")
             }
-        """.trimIndent())
+        """.trimIndent()
+        )
 
         // Run the build
         val runner = GradleRunner.create()
@@ -51,7 +52,7 @@ class GitHookPluginFunctionalTest {
         // Verify the result
         assertEquals(
             TaskOutcome.SUCCESS,
-            result.task(":installGitHooks" )?.outcome
+            result.task(":installGitHooks")?.outcome
         )
         assertTrue {
             gitHooksDestinationDir.exists()
