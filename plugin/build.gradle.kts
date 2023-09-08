@@ -39,7 +39,7 @@ testing {
         }
     }
 }
-version = "1.0.0"
+version = "1.0.1"
 group = "eu.bambooapps.gradle"
 
 gradlePlugin {
