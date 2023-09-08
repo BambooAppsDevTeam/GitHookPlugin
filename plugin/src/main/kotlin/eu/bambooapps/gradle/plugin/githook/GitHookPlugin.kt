@@ -7,12 +7,19 @@ import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.create
 import org.gradle.kotlin.dsl.register
+import org.gradle.util.GradleVersion
 
 /**
  * Plugin that helps to copy git hooks to the .git folder from the specified directory
  */
 class GitHookPlugin : Plugin<Project> {
+    private val minGradleVersion = GradleVersion.version("7.0")
+
     override fun apply(project: Project) {
+        check(GradleVersion.current() >= minGradleVersion) {
+            "GitHookPlugin requires Gradle 7.0 or later."
+        }
+
         val extension = project.extensions.create<GitHooksExtension>("gitHooks")
         // Register a task
         project.tasks.register<CopyGitHooks>("copyGitHooks") {
