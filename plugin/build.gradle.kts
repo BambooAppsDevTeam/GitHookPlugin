@@ -9,6 +9,10 @@ plugins {
     id("com.gradle.plugin-publish") version "1.2.1"
 }
 
+kotlin {
+    jvmToolchain(11)
+}
+
 repositories {
     // Use Maven Central for resolving dependencies.
     mavenCentral()
