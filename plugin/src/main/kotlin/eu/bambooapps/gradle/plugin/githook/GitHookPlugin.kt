@@ -5,6 +5,7 @@ package eu.bambooapps.gradle.plugin.githook
 
 import org.gradle.api.Plugin
 import org.gradle.api.Project
+import org.gradle.kotlin.dsl.assign
 import org.gradle.kotlin.dsl.create
 import org.gradle.kotlin.dsl.register
 import org.gradle.util.GradleVersion
@@ -25,10 +26,11 @@ class GitHookPlugin : Plugin<Project> {
         project.tasks.register<CopyGitHooks>("copyGitHooks") {
             description = "Copies the git hooks from /git-hooks to the .git folder."
             group = "git hooks"
-            gitHooksDirectory.set(extension.gitHooksDirectory)
-            gitHooksDestinationDirectory.set(
-                project.rootProject.layout.projectDirectory.dir(".git/hooks")
-            )
+            gitHooksDirectory = extension.gitHooksDirectory
+                .convention(project.rootProject.layout.projectDirectory.dir("git-hooks"))
+            gitHooksDestinationDirectory = extension.gitDirectory
+                .convention(project.rootProject.layout.projectDirectory.dir(".git"))
+                .dir("hooks")
             onlyIf { isLinuxOrMacOs() }
         }
 
