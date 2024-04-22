@@ -11,7 +11,7 @@ Then, in your project's `gradle/libs.version.toml` (version catalog) file, add t
 ```toml
 [versions]
 # ...
-gitHooksPlugin = "1.0.1" # or pick the latest version available
+gitHooksPlugin = "1.1.0" # or pick the latest version available
 
 [plugins]
 # ...
