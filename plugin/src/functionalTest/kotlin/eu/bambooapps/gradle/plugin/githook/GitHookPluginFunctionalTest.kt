@@ -37,6 +37,38 @@ class GitHookPluginFunctionalTest {
             
             gitHooks {
                 gitHooksDirectory = project.layout.projectDirectory.dir("${gitHooksDir.path}")
+                gitDirectory = project.layout.projectDirectory.dir(".git")
+            }
+        """.trimIndent()
+        )
+
+        // Run the build
+        val runner = GradleRunner.create()
+        runner.forwardOutput()
+        runner.withPluginClasspath()
+        runner.withArguments("installGitHooks")
+        runner.withProjectDir(projectDir)
+        val result = runner.build()
+
+        // Verify the result
+        assertEquals(
+            TaskOutcome.SUCCESS,
+            result.task(":installGitHooks")?.outcome
+        )
+        assertTrue {
+            gitHooksDestinationDir.exists()
+        }
+    }
+
+    @Test
+    fun `use convention`() {
+        gitHooksDir.mkdir()
+        // Set up the test build
+        settingsFile.writeText("")
+        buildFile.writeText(
+            """
+            plugins {
+                id('eu.bambooapps.gradle.plugin.githook')
             }
         """.trimIndent()
         )
