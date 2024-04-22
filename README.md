@@ -24,15 +24,18 @@ Then, in your project's root `build.gradle.kts` file, add the following line to 
 alias(libs.plugins.gitHooks)
 ```
 
-You'll need to specify the location of the folder with your hooks for the plugin to use. To do this, add the following block to your project's root `build.gradle.kts` file:
+You can specify the location of the folder with your hooks for the plugin to use and git root directory. You can configure them by adding the following block to your project's root `build.gradle.kts` file:
 
 ```kotlin
 gitHooks {
-    gitHooksDirectory.set(project.layout.projectDirectory.dir("git-hooks")) // or any other path where you put your hooks
+    gitHooksDirectory = project.layout.projectDirectory.dir("git-hooks") // or any other path where you put your hooks
+    gitDirectory = project.rootProject.layout.projectDirectory.dir(".git")
 }
 ```
 
-After that, you can run `./gradlew installGitHooks` to configure hooks on your machine. If you want to automate this process a little, you can set up a dependency to `installGitHooks` task to the earliest stage of the build, or whatever task you like. For example, in the Android projects, it can be defined like this in the root project's `build.gradle.kts`:
+The values above are default, they will be used if they are not provided explicitly.
+
+After the setup, you can run `./gradlew installGitHooks` to configure hooks on your machine. If you want to automate this process a little, you can set up a dependency to `installGitHooks` task to the earliest stage of the build, or whatever task you like. For example, in the Android projects, it can be defined like this in the root project's `build.gradle.kts`:
 
 ```kotlin
 tasks {
