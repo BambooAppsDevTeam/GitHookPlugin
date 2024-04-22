@@ -4,4 +4,5 @@ import org.gradle.api.file.DirectoryProperty
 
 interface GitHooksExtension {
     val gitHooksDirectory: DirectoryProperty
+    val gitDirectory: DirectoryProperty
 }
