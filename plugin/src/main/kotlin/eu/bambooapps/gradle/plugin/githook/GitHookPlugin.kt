@@ -27,9 +27,10 @@ class GitHookPlugin : Plugin<Project> {
             description = "Copies the git hooks from /git-hooks to the .git folder."
             group = "git hooks"
             gitHooksDirectory = extension.gitHooksDirectory
-                .orElse(project.rootProject.layout.projectDirectory.dir("git-hooks"))
-            gitHooksDestinationDirectory = extension.gitDirectory.dir("hooks")
-                .orElse(project.rootProject.layout.projectDirectory.dir(".git/hooks"))
+                .convention(project.rootProject.layout.projectDirectory.dir("git-hooks"))
+            gitHooksDestinationDirectory = extension.gitDirectory
+                .convention(project.rootProject.layout.projectDirectory.dir(".git"))
+                .dir("hooks")
             onlyIf { isLinuxOrMacOs() }
         }
 
