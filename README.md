@@ -1,6 +1,6 @@
 # Git Hooks Gradle Plugin
 
-This is a plugin that can automatically setup [Git hooks](https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks) for your project, so you can store your hooks in the repo, and every developer will have the same hooks configured. Useful for setting up linter as a pre-commit hook.
+This is a plugin that can automatically setup [Git hooks](https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks) for your project, so you can store your hooks in the repo, and every developer will have the same hooks configured. Useful for setting up linter as a pre-commit hook. Based on scripts in [this template repo](https://github.com/AdamMc331/AndroidAppTemplate/blob/development/buildscripts/githooks.gradle) and [this article](https://blog.sebastiano.dev/ooga-chaka-git-hooks-to-enforce-code-quality/)
 
 ## Usage
 
