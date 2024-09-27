@@ -9,7 +9,7 @@ plugins {
     `java-gradle-plugin`
     `kotlin-dsl`
 
-    id("io.gitlab.arturbosch.detekt") version "1.23.6"
+    id("io.gitlab.arturbosch.detekt") version "1.23.7"
     id("com.gradle.plugin-publish") version "1.2.1"
 }
 
