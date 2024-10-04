@@ -34,7 +34,6 @@ class GitHookPlugin : Plugin<Project> {
             gitHooksDirectory = extension.gitHooksDirectory
                 .convention(project.rootProject.layout.projectDirectory.dir("git-hooks"))
             gitHooksDestinationDirectory = hooksDirectory
-            onlyIf { isLinuxOrMacOs() }
         }
 
 
@@ -43,7 +42,6 @@ class GitHookPlugin : Plugin<Project> {
             group = "git hooks"
             gitHooksDestinationDirectory = hooksDirectory
             dependsOn("copyGitHooks")
-            onlyIf { isLinuxOrMacOs() }
             doLast {
                 logger.debug("Git hook installed successfully.")
             }
