@@ -20,7 +20,7 @@ jobs:
           distribution: 'temurin'
           java-version: 23
       - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@4
+        uses: gradle/actions/setup-gradle@v4
         with:
           validate-wrappers: true
       - name: Run check
