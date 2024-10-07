@@ -36,7 +36,7 @@ class GitHookPluginFunctionalTest {
             }
             
             gitHooks {
-                gitHooksDirectory = project.layout.projectDirectory.dir("${gitHooksDir.path}")
+                gitHooksDirectory = project.layout.projectDirectory.dir("git-hooks")
                 gitDirectory = project.layout.projectDirectory.dir(".git")
             }
         """.trimIndent()
@@ -53,7 +53,7 @@ class GitHookPluginFunctionalTest {
         // Verify the result
         assertEquals(
             TaskOutcome.SUCCESS,
-            result.task(":installGitHooks")?.outcome
+            result.task(":copyGitHooks")?.outcome
         )
         assertTrue {
             gitHooksDestinationDir.exists()
@@ -84,7 +84,7 @@ class GitHookPluginFunctionalTest {
         // Verify the result
         assertEquals(
             TaskOutcome.SUCCESS,
-            result.task(":installGitHooks")?.outcome
+            result.task(":copyGitHooks")?.outcome
         )
         assertTrue {
             gitHooksDestinationDir.exists()
