@@ -11,7 +11,7 @@ Then, in your project's `gradle/libs.version.toml` (version catalog) file, add t
 ```toml
 [versions]
 # ...
-gitHooksPlugin = "1.1.0" # or pick the latest version available
+gitHooksPlugin = "1.1.1" # or pick the latest version available
 
 [plugins]
 # ...
@@ -33,7 +33,7 @@ gitHooks {
 }
 ```
 
-The values above are default, they will be used if they are not provided explicitly.
+The values above are default, they will be used if nothing is set explicitly.
 
 After the setup, you can run `./gradlew installGitHooks` to configure hooks on your machine. If you want to automate this process a little, you can set up a dependency to `installGitHooks` task to the earliest stage of the build, or whatever task you like. For example, in the Android projects, it can be defined like this in the root project's `build.gradle.kts`:
 
