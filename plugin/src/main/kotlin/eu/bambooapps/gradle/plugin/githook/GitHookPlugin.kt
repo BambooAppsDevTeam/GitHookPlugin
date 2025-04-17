@@ -5,6 +5,7 @@ package eu.bambooapps.gradle.plugin.githook
 
 import org.gradle.api.Plugin
 import org.gradle.api.Project
+import org.gradle.internal.os.OperatingSystem
 import org.gradle.kotlin.dsl.assign
 import org.gradle.kotlin.dsl.create
 import org.gradle.kotlin.dsl.register
@@ -50,9 +51,8 @@ class GitHookPlugin : Plugin<Project> {
     }
 
     private fun isLinuxOrMacOs(): Boolean {
-        val osName = System.getProperty("os.name").lowercase()
-        return osName.contains("linux") ||
-                osName.contains("mac os") ||
-                osName.contains("macos")
+        val osName = OperatingSystem.current()
+        return osName.isLinux ||
+                osName.isMacOsX
     }
 }
