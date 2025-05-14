@@ -66,7 +66,7 @@ gradlePlugin {
         displayName = "GitHook – store Git hooks in your Gradle project and add them to Git on demand"
         description =
             """A plugin that helps you with adding Git hooks to the project and ensuring that every developer has the same hooks
-        """.trimMargin()
+            """.trimMargin()
         tags = listOf("git", "git-hook")
         implementationClass = "eu.bambooapps.gradle.plugin.githook.GitHookPlugin"
     }
@@ -88,5 +88,3 @@ tasks {
         jvmTarget = "11"
     }
 }
-
-
