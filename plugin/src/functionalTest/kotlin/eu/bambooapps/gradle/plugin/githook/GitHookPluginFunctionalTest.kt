@@ -42,11 +42,13 @@ class GitHookPluginFunctionalTest {
         )
 
         // Run the build
-        val runner = GradleRunner.create()
-        runner.forwardOutput()
-        runner.withPluginClasspath()
-        runner.withArguments("installGitHooks")
-        runner.withProjectDir(projectDir)
+        val runner =
+            GradleRunner
+                .create()
+                .forwardOutput()
+                .withPluginClasspath()
+                .withArguments("installGitHooks")
+                .withProjectDir(projectDir)
         val result = runner.build()
 
         // Verify the result
@@ -73,11 +75,13 @@ class GitHookPluginFunctionalTest {
         )
 
         // Run the build
-        val runner = GradleRunner.create()
-        runner.forwardOutput()
-        runner.withPluginClasspath()
-        runner.withArguments("installGitHooks")
-        runner.withProjectDir(projectDir)
+        val runner =
+            GradleRunner
+                .create()
+                .forwardOutput()
+                .withPluginClasspath()
+                .withArguments("installGitHooks")
+                .withProjectDir(projectDir)
         val result = runner.build()
 
         // Verify the result
