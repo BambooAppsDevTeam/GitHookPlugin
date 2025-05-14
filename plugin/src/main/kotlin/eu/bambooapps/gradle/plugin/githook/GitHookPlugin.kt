@@ -24,19 +24,25 @@ class GitHookPlugin : Plugin<Project> {
 
         val extension = project.extensions.create<GitHooksExtension>("gitHooks")
 
-        val hooksDirectory = extension.gitDirectory
-            .convention(project.rootProject.layout.projectDirectory.dir(".git"))
-            .dir("hooks")
+        val hooksDirectory =
+            extension.gitDirectory
+                .convention(
+                    project.rootProject.layout.projectDirectory
+                        .dir(".git"),
+                ).dir("hooks")
 
         // Register a task
         project.tasks.register<CopyGitHooks>("copyGitHooks") {
             description = "Copies the git hooks from /git-hooks to the .git folder."
             group = "git hooks"
-            gitHooksDirectory = extension.gitHooksDirectory
-                .convention(project.rootProject.layout.projectDirectory.dir("git-hooks"))
+            gitHooksDirectory =
+                extension.gitHooksDirectory
+                    .convention(
+                        project.rootProject.layout.projectDirectory
+                            .dir("git-hooks"),
+                    )
             gitHooksDestinationDirectory = hooksDirectory
         }
-
 
         project.tasks.register<InstallGitHooks>("installGitHooks") {
             description = "Prepares git hooks for use by git"
@@ -53,6 +59,6 @@ class GitHookPlugin : Plugin<Project> {
     private fun isLinuxOrMacOs(): Boolean {
         val osName = OperatingSystem.current()
         return osName.isLinux ||
-                osName.isMacOsX
+            osName.isMacOsX
     }
 }

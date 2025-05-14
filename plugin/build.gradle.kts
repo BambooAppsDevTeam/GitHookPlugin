@@ -10,6 +10,7 @@ plugins {
     `kotlin-dsl`
 
     id("io.gitlab.arturbosch.detekt") version "1.23.7"
+    id("org.jmailen.kotlinter") version "5.0.2"
     id("com.gradle.plugin-publish") version "1.2.1"
 }
 

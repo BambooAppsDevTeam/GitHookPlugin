@@ -15,7 +15,6 @@ import kotlin.test.assertTrue
  * A simple functional test for the 'eu.bambooapps.gradle.plugin.githook' plugin.
  */
 class GitHookPluginFunctionalTest {
-
     @field:TempDir
     lateinit var projectDir: File
 
@@ -39,7 +38,7 @@ class GitHookPluginFunctionalTest {
                 gitHooksDirectory = project.layout.projectDirectory.dir("git-hooks")
                 gitDirectory = project.layout.projectDirectory.dir(".git")
             }
-        """.trimIndent()
+            """.trimIndent(),
         )
 
         // Run the build
@@ -53,7 +52,7 @@ class GitHookPluginFunctionalTest {
         // Verify the result
         assertEquals(
             TaskOutcome.SUCCESS,
-            result.task(":copyGitHooks")?.outcome
+            result.task(":copyGitHooks")?.outcome,
         )
         assertTrue {
             gitHooksDestinationDir.exists()
@@ -70,7 +69,7 @@ class GitHookPluginFunctionalTest {
             plugins {
                 id('eu.bambooapps.gradle.plugin.githook')
             }
-        """.trimIndent()
+            """.trimIndent(),
         )
 
         // Run the build
@@ -84,7 +83,7 @@ class GitHookPluginFunctionalTest {
         // Verify the result
         assertEquals(
             TaskOutcome.SUCCESS,
-            result.task(":copyGitHooks")?.outcome
+            result.task(":copyGitHooks")?.outcome,
         )
         assertTrue {
             gitHooksDestinationDir.exists()

@@ -8,7 +8,6 @@ import org.gradle.process.ExecOperations
 import javax.inject.Inject
 
 abstract class InstallGitHooks : DefaultTask() {
-
     @get:Inject
     abstract val execOperations: ExecOperations
 
