@@ -9,9 +9,9 @@ plugins {
     `java-gradle-plugin`
     `kotlin-dsl`
 
-    id("io.gitlab.arturbosch.detekt") version "1.23.7"
-    id("org.jmailen.kotlinter") version "5.0.2"
-    id("com.gradle.plugin-publish") version "1.2.1"
+    alias(libs.plugins.detekt)
+    alias(libs.plugins.kotlinter)
+    alias(libs.plugins.publisher)
 }
 
 kotlin {
