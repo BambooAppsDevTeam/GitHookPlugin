@@ -1,6 +1,6 @@
 [versions]
 detekt = "1.23.8"
-kotlinter = "5.0.2"
+kotlinter = "5.1.1"
 publishPlugin = "1.2.1"
 
 [plugins]
