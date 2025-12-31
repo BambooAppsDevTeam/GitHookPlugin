@@ -1,9 +1,9 @@
 [versions]
-detekt = "1.23.8"
+detekt = "2.0.0-alpha.1"
 kotlinter = "5.1.1"
 publishPlugin = "1.2.1"
 
 [plugins]
-detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
+detekt = { id = "dev.detekt", version.ref = "detekt" }
 kotlinter = { id = "org.jmailen.kotlinter", version.ref = "kotlinter" }
 publisher = { id = "com.gradle.plugin-publish", version.ref = "publishPlugin" }

@@ -16,13 +16,13 @@ plugins {
 
 kotlin {
     compilerOptions {
-        jvmTarget = JvmTarget.JVM_11
+        jvmTarget = JvmTarget.JVM_17
     }
 }
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_11
-    targetCompatibility = JavaVersion.VERSION_11
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
 }
 
 repositories {
@@ -79,12 +79,12 @@ tasks.named("check") {
 }
 
 tasks {
-    withType<io.gitlab.arturbosch.detekt.Detekt>().configureEach {
+    withType<dev.detekt.gradle.Detekt>().configureEach {
         // Target version of the generated JVM bytecode. It is used for type resolution.
-        jvmTarget = "11"
+        jvmTarget = "17"
     }
-    withType<io.gitlab.arturbosch.detekt.DetektCreateBaselineTask>().configureEach {
+    withType<dev.detekt.gradle.DetektCreateBaselineTask>().configureEach {
         // Target version of the generated JVM bytecode. It is used for type resolution.
-        jvmTarget = "11"
+        jvmTarget = "17"
     }
 }
