@@ -59,8 +59,6 @@ version = "1.1.1"
 group = "eu.bambooapps.gradle"
 
 gradlePlugin {
-    website = "https://github.com/bamboo-apps/GitHookPlugin"
-    vcsUrl = "https://github.com/bamboo-apps/GitHookPlugin.git"
     val githook by plugins.creating {
         id = "eu.bambooapps.gradle.plugin.githook"
         displayName = "GitHook – store Git hooks in your Gradle project and add them to Git on demand"
@@ -68,6 +66,8 @@ gradlePlugin {
             """A plugin that helps you with adding Git hooks to the project and ensuring that every developer has the same hooks
             """.trimMargin()
         tags = listOf("git", "git-hook")
+        website = "https://github.com/bamboo-apps/GitHookPlugin"
+        vcsUrl = "https://github.com/bamboo-apps/GitHookPlugin.git"
         implementationClass = "eu.bambooapps.gradle.plugin.githook.GitHookPlugin"
     }
     testSourceSets.add(sourceSets["functionalTest"])
